@@ -16,7 +16,7 @@ const Testimonials = () => {
     const [reviews, setReviews] = useState([])
     useEffect(() => {
         const loadData = () => {
-            fetch("reviews.json")
+            fetch("http://localhost:5000/reviews")
             .then(res => res.json())
             .then(data => {
                 setReviews(data)
@@ -27,7 +27,7 @@ const Testimonials = () => {
 
 
     }, [])
-    console.log(reviews)
+    // console.log(reviews)
     return (
         <div className="my-20">
             <SectionTitle heading={"Testimonials"} subHeading={"What Out Cliend Say"}>
