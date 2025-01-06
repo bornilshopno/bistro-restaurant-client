@@ -2,13 +2,14 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from './AuthProvider';
 import { Helmet } from 'react-helmet-async';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import SocialLogin from './SocialLogin';
 
 const Login = () => {
     const { userLogin, loading, setLoading } = useContext(AuthContext);
-    const navigate=useNavigate()
-    const location=useLocation();
-    const locs=location.state?.from?.pathname || "/";
+    const navigate = useNavigate()
+    const location = useLocation();
+    const locs = location.state?.from?.pathname || "/";
     const captchaRef = useRef(null);
     const [disable, setDisable] = useState(true)
     useEffect(() => {
@@ -25,7 +26,7 @@ const Login = () => {
                 const user = res.user;
                 console.log(user)
                 setLoading(false)
-                navigate(locs, {replace: true})
+                navigate(locs, { replace: true })
 
             })
     }
@@ -54,7 +55,7 @@ const Login = () => {
                             quasi. In deleniti eaque aut repudiandae et a id nisi.
                         </p>
                     </div>
-                    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
                         <form className="card-body" onSubmit={handleLogin}>
                             <div className="form-control">
                                 <label className="label">
@@ -80,9 +81,12 @@ const Login = () => {
                                 <button className="btn btn-primary" disabled={disable}>Login</button>
                             </div>
                         </form>
+                        <p className='text-center'>New to the website? pls <span className='text-blue-700 font-semibold'><Link to={"/register"}>Sign Up</Link></span> </p>
+                        <SocialLogin />
                     </div>
                 </div>
             </div>
+
         </div>
     );
 };

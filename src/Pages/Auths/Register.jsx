@@ -2,35 +2,68 @@ import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "./AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import SocialLogin from "./SocialLogin";
 
 
 
 const Register = () => {
-  const {createUser,setUser,setLoading,updateUserProfile}=useContext(AuthContext)
-  const navigate=useNavigate()
+  const axiosPublic = useAxiosPublic();
+  const { createUser, setUser, setLoading, updateUserProfile } = useContext(AuthContext)
+  const navigate = useNavigate()
   const {
     register,
-    handleSubmit,reset,
+    handleSubmit, reset,
     formState: { errors },
   } = useForm();//
-  const onSubmit = (data) => { 
+  const onSubmit = (data) => {
     console.log(data);
-    createUser(data.email , data.password)
-    .then(result=>{
-      const loggedUser=result.user;
-      console.log(loggedUser)
-      console.log(data.name, data.photoURL)
-      updateUserProfile(data.name , data.photoURL)
-      .then(()=>{console.log("user pro ino updated");
-        reset();
-        navigate("/")
-      })
-      .catch(error=>{console.log(error)})
-      setLoading(false)
-    })
+    createUser(data.email, data.password)
+      .then(result => {
+        const loggedUser = result.user;
+        console.log(loggedUser)
+        console.log(data.name, data.photoURL)
+        updateUserProfile(data.name, data.photoURL)
+          .then(() => {
+            console.log("user pro ino updated");
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            }
+            axiosPublic.post('/users', userInfo)
+              .then(res => {
+                if (res.data.insertedId) {
+                  Swal.fire({
+                    title: "User Created Successfully",
+                    showClass: {
+                      popup: `
+                  animate__animated
+                  animate__fadeInUp
+                  animate__faster
+                `
+                    },
+                    hideClass: {
+                      popup: `
+                  animate__animated
+                  animate__fadeOutDown
+                  animate__faster
+                `
+                    }
+                  });
+                  reset();
+                  navigate("/");
 
-   }
+                }
+              })
+
+          })
+          .catch(error => { console.log(error) })
+        setLoading(false)
+      })
+
+  }
 
   //console.log(watch("example")) // watch input value by passing the name of it
 
@@ -92,9 +125,12 @@ const Register = () => {
 
               </div>
             </form>
+            <p className="text-center my-2">Already have an account? pls <span className="text-blue-700 font-semibold"><Link to={"/login"}>LogIn</Link></span></p>
+            <SocialLogin />
           </div>
         </div>
       </div>
+
     </div>
   );
 };

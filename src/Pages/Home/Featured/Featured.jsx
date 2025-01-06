@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import SectionTitle from "../../../Components/Shared/SectionTitle";
 import featuredImg from "../../../assets/home/featured.jpg"
 import "./Featured.css"
 
 const Featured = () => {
+    const navigate=useNavigate();
     return (
         <div className="featured-item text-white pt-10 my-10 bg-fixed">
             <SectionTitle heading={"Featured Item"} subHeading={"Check It Out"}>
@@ -18,7 +20,7 @@ const Featured = () => {
                     Where can I get Some
                 </p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia aspernatur ut neque eligendi, repellendus dolores consequatur, ipsa officiis amet officia, rerum molestiae! Dolorem doloremque nulla alias, expedita asperiores, odit veritatis pariatur eius cum sunt enim modi dolorum veniam mollitia. Ab est deleniti officiis quaerat tempora natus expedita dolorum fuga in!</p>
-                <button className="btn btn-outline border-0 border-b-4 mt-4">Order Now</button>
+                <button className="btn btn-outline border-0 border-b-4 mt-4" onClick={()=>navigate("/order/salad")}>Order Now</button>
             </div>
 
             </div>
