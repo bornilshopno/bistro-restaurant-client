@@ -9,7 +9,7 @@ import useCart from "../../Hooks/useCart";
 const Navbar = () => {
   const { user, logout, setLoading } = useContext(AuthContext)
   const [cart]=useCart()
-  console.log(user)
+  // console.log(user)
   const handleLogOut = () => {
     logout()
       .then(() => {
@@ -30,7 +30,7 @@ const Navbar = () => {
   <div className="badge badge-secondary">{cart.length}</div>
 </button></Link></li>
     { user ? 
-    <> <Link className="mr-4" onClick={handleLogOut} >LogOut</Link> <img src={user.photoURL} className="w-20" alt="phto" /> </> 
+    <> <Link className="mr-4" onClick={handleLogOut} >LogOut</Link> <img src={user.photoURL} className="w-10 rounded-full" alt="phto" /> </> 
     : <> <li><Link to={"/login"}>LogIn</Link></li> </>}
    
   </>

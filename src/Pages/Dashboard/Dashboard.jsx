@@ -3,13 +3,15 @@ import { FaBook, FaCalendar, FaEnvelope, FaList, FaPen, FaUsers, FaUtensils, } f
 
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 
 const Dashboard = () => {
     const[cart]=useCart();
+    
 
     //TODO:get isAdmin value from the database
-    const isAdmin = true;
+    const [isAdmin]=useAdmin();
     return (
         <div className="flex">
             <div className="w-56 min-h-screen bg-amber-400">
@@ -29,7 +31,7 @@ const Dashboard = () => {
                         <NavLink to={"/dashboard/manageBookings"}><FaBook /> Manage Bookings</NavLink>
                     </li>
                     <li>
-                        <NavLink to={"/dashboard/bookings"}><FaUsers />All Users</NavLink>
+                        <NavLink to={"/dashboard/users"}><FaUsers />All Users</NavLink>
                     </li>
                     </>:
                     <>
@@ -59,7 +61,9 @@ const Dashboard = () => {
                 </ul>
             </div>
             <div className="flex-1">
-                <Outlet></Outlet>
+             <div className="mx-4 border-4 border-amber-400 min-h-screen">
+             <Outlet></Outlet>
+             </div>
             </div>
         </div>
     );
