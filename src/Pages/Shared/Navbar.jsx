@@ -25,9 +25,9 @@ const Navbar = () => {
     <li><Link to={"/order/salad"}>Order Food</Link></li>
     <li><Link to={"/register"}>Register</Link></li>
     <li><Link to={"/secret"}>Secret</Link></li>
-    <li><Link to={"/"}><button className="btn btn-sm">
+    <li><Link to={"/dashboard/cart"}><button className="btn btn-sm">
  <FaCartShopping></FaCartShopping>
-  <div className="badge badge-secondary">+{cart.length}</div>
+  <div className="badge badge-secondary">{cart.length}</div>
 </button></Link></li>
     { user ? 
     <> <Link className="mr-4" onClick={handleLogOut} >LogOut</Link> <img src={user.photoURL} className="w-20" alt="phto" /> </> 

@@ -9,6 +9,8 @@ import Menu from "../Pages/Menu/Menu/Menu";
 import Order from "../Pages/Orders/Order/Order";
 import PrivateRoute from "./PrivateRoute";
 import Secret from "../Components/Secret";
+import Dashboard from "../Components/Dashboard/Dashboard";
+import Cart from "../Components/Dashboard/Cart/Cart";
 
 export const routes = createBrowserRouter([
     {
@@ -41,6 +43,17 @@ export const routes = createBrowserRouter([
                 element: <PrivateRoute><Secret></Secret></PrivateRoute>
         },
         ]
-    }
+    },
+    {
+        path:"/dashboard",
+        element:<Dashboard></Dashboard>,
+        children: [
+            {
+                path:"/dashboard/cart",
+                element: <Cart></Cart>
+            }
+        ]
+    },
+   
 ])
 
