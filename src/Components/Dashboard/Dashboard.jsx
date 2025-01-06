@@ -1,5 +1,5 @@
 import { FaHome, FaShoppingCart } from "react-icons/fa";
-import { FaCalendar, FaEnvelope, FaList, FaPen, } from "react-icons/fa6";
+import { FaBook, FaCalendar, FaEnvelope, FaList, FaPen, FaUsers, FaUtensils, } from "react-icons/fa6";
 
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
@@ -9,11 +9,30 @@ const Dashboard = () => {
     const[cart]=useCart();
 
     //TODO:get isAdmin value from the database
-    const isAdmin= true;
+    const isAdmin = true;
     return (
         <div className="flex">
             <div className="w-56 min-h-screen bg-amber-400">
-                <ul className="menu">
+                <ul className="menu p-4">
+                    { isAdmin ? 
+                    <>
+                    <li>
+                        <NavLink to={"/dashboard/adminHome"}><FaHome />Admin Home</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={"/dashboard/addItems"}><FaUtensils />Add Items</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={"/dashboard/manageItems"}><FaList />Manage Items</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={"/dashboard/manageBookings"}><FaBook /> Manage Bookings</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={"/dashboard/bookings"}><FaUsers />All Users</NavLink>
+                    </li>
+                    </>:
+                    <>
                     <li>
                         <NavLink to={"/dashboard/userHome"}><FaHome />User Home</NavLink>
                     </li>
@@ -29,6 +48,7 @@ const Dashboard = () => {
                     <li>
                         <NavLink to={"/dashboard/bookings"}><FaList />My Booking</NavLink>
                     </li>
+                    </>}
                     <div className="divider"></div>
                     <li><Link to={"/"}>Home</Link></li>
                     <li><Link to={"/menu"}>Our Menu</Link></li>
