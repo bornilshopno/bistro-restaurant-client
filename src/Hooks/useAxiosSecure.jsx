@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Pages/Auths/AuthProvider";
 
@@ -19,21 +19,27 @@ const useAxiosSecure = () => {
         return Promise.reject(error);
     })
 
+        useEffect(()=>{
+            axiosSecure.interceptors.response.use(function (response) {
+                return response;
+            },
+                async (error) => {
+                    const status = error.response.status;
+                   // console.log('status error in interceptor', status);
+                    // for 401 and 403 error make the user logout
+                    if (status === 401 || status === 403) {
+                        await logout();
+                        navigate('/login')
+                    }
+                    return Promise.reject(error)
+                }
+            )
 
-    axiosSecure.interceptors.response.use(function (response) {
-        return response;
-    },
-        async (error) => {
-            const status = error.response.status;
-           // console.log('status error in interceptor', status);
-            // for 401 and 403 error make the user logout
-            if (status === 401 || status === 403) {
-                await logout();
-                navigate('/login')
-            }
-            return Promise.reject(error)
-        }
-    )
+
+
+        },[logout, navigate])
+
+
 
     return axiosSecure
 };
