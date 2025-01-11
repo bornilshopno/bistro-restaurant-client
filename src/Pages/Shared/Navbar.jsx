@@ -71,7 +71,7 @@ const Navbar = () => {
         <a className="btn">Button</a>
       </div>
     </div>
-    <div className="h-[67px] bg-red-600"></div>
+    <div className="h-[79px] bg-red-600"></div>
   </>
   );
 };
