@@ -39,7 +39,7 @@ const Dashboard = () => {
                         <NavLink to={"/dashboard/userHome"}><FaHome />User Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to={"/dashboard/reservation"}><FaCalendar />Reservation</NavLink>
+                        <NavLink to={"/dashboard/paymentHistory"}><FaCalendar />Payment History</NavLink>
                     </li>
                     <li>
                         <NavLink to={"/dashboard/addReview"}><FaPen />Add Review</NavLink>
