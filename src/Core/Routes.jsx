@@ -67,6 +67,7 @@ export const routes = createBrowserRouter([
                 path:"/dashboard/paymentHistory",
                 element:<PaymentHistory></PaymentHistory>
             },
+            
             //admin routes
             {
                 path: "users",
